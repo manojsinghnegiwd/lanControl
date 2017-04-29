@@ -4,31 +4,67 @@
 var socket = require('socket.io');
 var robot = require("robotjs");
 var http = require("http");
+var socketClient = require('socket.io-client');
 var app = http.createServer();
-var io = socket(app);
+var port = 3000;
 
-io.on('connection', function (socket) {
+window.onload = init;
 
-	(function () {
-		var start = document.querySelector('#start');
-		start.addEventListener('click', move);
-	})();
+var init = function () {
+	var startClientBtn = document.querySelector('#startClient');
+	var startServerBtn = document.querySelector('#startServer');
 
-	var previousPos = {};
-	var nextPos = {};
+	startClientBtn.addEventListener('click', startClient);
+	startServerBtn.addEventListener('click', startServer);
 
-	function move () {
-		var intervalId = setInterval(function () {
-			nextPos = robot.getMousePos();
+}
 
-			if(previousPos.x !== nextPos.x || previousPos.y !== nextPos.y) {
-				socket.emit('mousemove', nextPos);
-				previousPos = nextPos;
-			}
+var startClient = function () {
+	var client = socketClient('http://localhost:' + port);
 
-		}, 1)
-	}
+	socket.on('mousemove', function (data) {
+		console.log('move mouse to x: ' + mouse.x + ' y: ' + mouse.y)
+	})
+}
 
-})
+var startServer = function () {
+	var server = socket(app);
 
-io.listen(7000);
+	server.on('connection', function (client) {
+
+		console.log('client connected')
+
+	})
+
+	server.listen(7000);
+}
+
+
+
+// var io = socket(app);
+
+// io.on('connection', function (socket) {
+
+// 	(function () {
+// 		var start = document.querySelector('#start');
+// 		start.addEventListener('click', move);
+// 	})();
+
+// 	var previousPos = {};
+// 	var nextPos = {};
+
+// 	function move () {
+// 		var intervalId = setInterval(function () {
+// 			nextPos = robot.getMousePos();
+
+// 			if(previousPos.x !== nextPos.x || previousPos.y !== nextPos.y) {
+// 				socket.emit('mousemove', nextPos);
+// 				previousPos = nextPos;
+// 			}
+
+// 		}, 1)
+// 	}
+
+// })
+
+// io.listen(7000);

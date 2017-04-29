@@ -1,12 +1,13 @@
 {
-  "name": "electron-quick-start",
+  "name": "lan-control",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "Control pc remotely",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "rebuild": "npm rebuild --runtime=electron --target=1.6.2 --disturl=https://atom.io/download/atom-shell --abi=53"
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "repository": "https://github.com/manojsinghnegiwd/lanControl",
   "keywords": [
     "Electron",
     "quick",
@@ -14,9 +15,14 @@
     "tutorial",
     "demo"
   ],
-  "author": "GitHub",
-  "license": "CC0-1.0",
+  "author": "Manoj Singh Negi",
   "devDependencies": {
     "electron": "~1.6.2"
+  },
+  "dependencies": {
+    "install": "^0.8.9",
+    "npm": "^4.5.0",
+    "robotjs": "^0.4.7",
+    "socket.io": "^1.7.3"
   }
 }

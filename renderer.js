@@ -1,12 +1,14 @@
 // This file is required by the index.html file and will
 // be executed in the renderer process for that window.
 // All of the Node.js APIs are available in this process.
-var io = require('socket.io');
+var socket = require('socket.io');
 var robot = require("robotjs");
+var http = require("http");
+var app = http.createServer();
+var io = socket(app);
 
 (function () {
 	var start = document.querySelector('#start');
-
 	start.addEventListener('click', move);
 })();
 
@@ -24,3 +26,9 @@ function move () {
 
 	}, 1)
 }
+
+io.on('connection', (socket) => {
+  console.log('connection');
+})
+
+io.listen(7000);

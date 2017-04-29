@@ -7,28 +7,28 @@ var http = require("http");
 var app = http.createServer();
 var io = socket(app);
 
-(function () {
-	var start = document.querySelector('#start');
-	start.addEventListener('click', move);
-})();
+io.on('connection', function (socket) {
 
-var previousPos = {};
-var nextPos = {};
+	(function () {
+		var start = document.querySelector('#start');
+		start.addEventListener('click', move);
+	})();
 
-function move () {
-	var intervalId = setInterval(function () {
-		nextPos = robot.getMousePos();
+	var previousPos = {};
+	var nextPos = {};
 
-		if(previousPos.x !== nextPos.x || previousPos.y !== nextPos.y) {
-			console.log(nextPos)
-			previousPos = nextPos;
-		}
+	function move () {
+		var intervalId = setInterval(function () {
+			nextPos = robot.getMousePos();
 
-	}, 1)
-}
+			if(previousPos.x !== nextPos.x || previousPos.y !== nextPos.y) {
+				socket.emit('mousemove', nextPos);
+				previousPos = nextPos;
+			}
 
-io.on('connection', (socket) => {
-  console.log('connection');
+		}, 1)
+	}
+
 })
 
 io.listen(7000);

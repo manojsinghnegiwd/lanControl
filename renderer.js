@@ -8,8 +8,19 @@ var robot = require("robotjs");
 	var start = document.querySelector('#start');
 
 	start.addEventListener('click', move);
-})()
+})();
+
+var previousPos = {};
+var nextPos = {};
 
 function move () {
-	
+	var intervalId = setInterval(function () {
+		nextPos = robot.getMousePos();
+
+		if(previousPos.x !== nextPos.x || previousPos.y !== nextPos.y) {
+			console.log(nextPos)
+			previousPos = nextPos;
+		}
+
+	}, 1)
 }

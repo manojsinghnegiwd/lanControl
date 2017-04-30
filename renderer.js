@@ -10,7 +10,7 @@ var port = 3000;
 
 window.onload = init;
 
-var init = function () {
+function init () {
 	var startClientBtn = document.querySelector('#startClient');
 	var startServerBtn = document.querySelector('#startServer');
 
@@ -19,7 +19,7 @@ var init = function () {
 
 }
 
-var startClient = function () {
+function startClient () {
 	var client = socketClient('http://localhost:' + port);
 
 	socket.on('mousemove', function (data) {
@@ -27,7 +27,7 @@ var startClient = function () {
 	})
 }
 
-var startServer = function () {
+function startServer () {
 	var server = socket(app);
 
 	server.on('connection', function (client) {
@@ -36,7 +36,11 @@ var startServer = function () {
 
 	})
 
-	server.listen(7000);
+	console.log(port);
+
+	server.listen(port, function () {
+		console.log('server started')
+	});
 }
 
 

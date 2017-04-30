@@ -24,12 +24,19 @@ function init () {
 	// document events
 
 	document.addEventListener('click', sendClick);
+	document.addEventListener('dblclick', sendDoubleClick);
 
+}
+
+function sendDoubleClick () {
+	if(selectedClient) {
+		selectedClient.emit('mouseclick');
+	}
 }
 
 function sendClick () {
 	if(selectedClient) {
-		selectedClient.emit('mouseclick');
+		selectedClient.emit('mousedoubleclick');
 	}
 }
 
@@ -43,6 +50,10 @@ function startClient (address) {
 
 	client.on('mouseclick', function () {
 		robot.mouseClick('left');
+	})
+
+	client.on('mouseclick', function () {
+		robot.mouseClick('left', true);
 	})
 }
 

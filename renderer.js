@@ -11,18 +11,19 @@ var port = 3000;
 window.onload = init;
 
 function init () {
-	var startClientBtn = document.querySelector('#startClient');
-	var startServerBtn = document.querySelector('#startServer');
+	startClientBtn = document.querySelector('#startClient');
+	startServerBtn = document.querySelector('#startServer');
+	serverAddress = document.querySelector('#serverAddress');
 
 	startClientBtn.addEventListener('click', startClient);
 	startServerBtn.addEventListener('click', startServer);
 
 }
 
-function startClient () {
-	var client = socketClient('http://localhost:' + port);
+function startClient (address) {
+	var client = socketClient(serverAddress.value + ':' + port);
 
-	socket.on('mousemove', function (data) {
+	client.on('mousemove', function (data) {
 		console.log('move mouse to x: ' + mouse.x + ' y: ' + mouse.y)
 	})
 }

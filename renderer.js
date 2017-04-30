@@ -39,7 +39,6 @@ function startClient (address) {
 	client.on('mousemove', function (data) {
 		robot.setMouseDelay(0);
 		robot.moveMouse(data.x, data.y);
-		console.log('move mouse to x: ' + data.x + ' y: ' + data.y)
 	})
 
 	client.on('mouseclick', function () {

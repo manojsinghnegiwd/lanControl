@@ -42,7 +42,7 @@ function startClient (address) {
 		console.log('move mouse to x: ' + data.x + ' y: ' + data.y)
 	})
 
-	clent.on('mouseclick', function () {
+	client.on('mouseclick', function () {
 		robot.mouseClick('left');
 	})
 }

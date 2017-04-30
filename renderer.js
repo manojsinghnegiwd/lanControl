@@ -7,6 +7,9 @@ var http = require("http");
 var socketClient = require('socket.io-client');
 var app = http.createServer();
 var port = 3000;
+var selectedClient = null;
+var nextPos = {};
+var prevPos = {};
 
 window.onload = init;
 
@@ -35,13 +38,27 @@ function startServer () {
 
 		console.log('client connected')
 
-	})
+		selectedClient = client;
 
-	console.log(port);
+		var clearInterval = startTracking();
+
+	});
 
 	server.listen(port, function () {
 		console.log('server started')
 	});
+}
+
+function startTracking () {
+	return setInterval(function () {
+		nextPos = robot.getMousePos();
+
+		if(previousPos.x !== nextPos.x || previousPos.y !== nextPos.y) {
+			selectedClient.emit('mousemove', nextPos);
+			previousPos = nextPos;
+		}
+
+	}, 1)
 }
 
 

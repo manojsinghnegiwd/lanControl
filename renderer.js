@@ -21,6 +21,14 @@ function init () {
 	startClientBtn.addEventListener('click', startClient);
 	startServerBtn.addEventListener('click', startServer);
 
+	// document events
+
+	document.addEventListener('click', sendClick);
+
+}
+
+function sendClick () {
+	selectedClient.emit('mouseclick');
 }
 
 function startClient (address) {
@@ -30,6 +38,10 @@ function startClient (address) {
 		robot.setMouseDelay(0);
 		robot.moveMouse(data.x, data.y);
 		console.log('move mouse to x: ' + data.x + ' y: ' + data.y)
+	})
+
+	clent.on('mouseclick', function () {
+		robot.mouseClick('left');
 	})
 }
 

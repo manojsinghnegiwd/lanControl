@@ -28,7 +28,9 @@ function init () {
 }
 
 function sendClick () {
-	selectedClient.emit('mouseclick');
+	if(selectedClient) {
+		selectedClient.emit('mouseclick');
+	}
 }
 
 function startClient (address) {

@@ -27,7 +27,7 @@ function startClient (address) {
 	var client = socketClient(serverAddress.value + ':' + port);
 
 	client.on('mousemove', function (data) {
-		console.log('move mouse to x: ' + mouse.x + ' y: ' + mouse.y)
+		console.log('move mouse to x: ' + data.x + ' y: ' + data.y)
 	})
 }
 

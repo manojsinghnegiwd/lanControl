@@ -9,7 +9,7 @@ var app = http.createServer();
 var port = 3000;
 var selectedClient = null;
 var nextPos = {};
-var prevPos = {};
+var previousPos = {};
 
 window.onload = init;
 
